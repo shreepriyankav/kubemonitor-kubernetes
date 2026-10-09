@@ -248,6 +248,9 @@ flowchart TD
 5. **Service:** Provides network access to the application.
 6. **Port Forward:** Lets us access the dashboard at `http://localhost:8081`.
 
+## Dashboard Screenshot
+
+![KubeMonitor v2 Dashboard](kubemonitor-v2.png)
 
 
 
