@@ -226,3 +226,28 @@ The dashboard's displayed monitoring values are sample/demo data. The HTML dashb
 
 
 
+## Architecture Diagram
+
+```mermaid
+flowchart TD
+    A[User Browser] --> B[kubectl Port Forward]
+    B --> C[NodePort Service]
+    C --> D[Kubernetes Deployment]
+    D --> E[Pod 1 - NGINX]
+    D --> F[Pod 2 - NGINX]
+    D --> G[Pod 3 - NGINX]
+    H[Docker Image - kubemonitor:v2] --> D
+```
+
+### Architecture Explanation
+
+1. **Docker:** Packages the website into a container image.
+2. **Minikube:** Runs the local Kubernetes cluster.
+3. **Deployment:** Maintains the desired number of application replicas.
+4. **Pods:** Run the NGINX containers serving the dashboard.
+5. **Service:** Provides network access to the application.
+6. **Port Forward:** Lets us access the dashboard at `http://localhost:8081`.
+
+
+
+
