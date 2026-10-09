@@ -1,0 +1,21 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubemonitor
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: kubemonitor
+  template:
+    metadata:
+      labels:
+        app: kubemonitor
+    spec:
+      containers:
+        - name: kubemonitor
+          image: kubemonitor:v1
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80

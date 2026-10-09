@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KubeMonitor | DevOps Dashboard</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#071326;color:#e7f0ff}
+header{padding:20px 28px;background:#0b1b33;border-bottom:1px solid #203858;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+.brand{font-size:27px;font-weight:bold;color:#fff}
+.brand span{color:#3997ff}
+header p{margin:6px 0 0;color:#9db4d5;font-size:13px}
+.health{color:#34e6ad;font-size:14px}
+.version{display:inline-block;background:#173c64;border:1px solid #3997ff;color:#76bbff;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:bold;margin-top:12px}
+.layout{display:grid;grid-template-columns:190px 1fr;min-height:calc(100vh - 85px)}
+aside{padding:22px 12px;background:#09172c;border-right:1px solid #203858}
+nav a{display:block;padding:13px 12px;margin-bottom:7px;color:#c3d5ef;text-decoration:none;border-radius:7px}
+nav a:first-child{background:#1259aa;color:white}
+nav a:hover{background:#17365d}
+main{padding:24px;min-width:0}
+.welcome{padding:28px;border:1px solid #23456c;border-radius:12px;background:linear-gradient(110deg,#102a4b,#0b1a30);margin-bottom:20px}
+.welcome h1{margin:0 0 12px;font-size:clamp(24px,3vw,34px)}
+.welcome p{color:#b4c8e6;line-height:1.6;margin-bottom:0}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:20px}
+.card{background:#0b1b31;border:1px solid #203958;border-radius:10px;padding:20px;min-width:0}
+.card h3{font-size:14px;font-weight:normal;color:#b8cbe5;margin:0 0 16px}
+.number{font-size:32px;font-weight:bold;margin-bottom:10px}
+.green{color:#2de4a4}
+.blue{color:#46a4ff}
+.purple{color:#bd91ff}
+.muted{color:#9bb0cf;font-size:12px;line-height:1.7}
+.section-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.bar{height:9px;border-radius:10px;background:#233852;margin:12px 0 18px;overflow:hidden}
+.bar span{display:block;height:100%;border-radius:10px}
+.cpu{width:35%;background:#389dff}
+.memory{width:64%;background:#14d7a0}
+.storage{width:18%;background:#a77bff}
+.event{padding:12px 0;border-bottom:1px solid #1b304b;font-size:13px;color:#c9d9ee;line-height:1.5}
+.event:last-child{border:0}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#24dfa0;margin-right:9px}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th,td{text-align:left;padding:12px 7px;border-bottom:1px solid #1d3049}
+th{color:#9fb5d6;font-weight:normal}
+td{color:#d5e4f7;overflow-wrap:anywhere}
+footer{text-align:center;color:#8ea5c6;padding:20px;border-top:1px solid #203858;font-size:12px}
+@media(max-width:900px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.layout{grid-template-columns:145px 1fr}main{padding:15px}}
+@media(max-width:600px){.layout{grid-template-columns:1fr}aside{border-right:0;border-bottom:1px solid #203858;padding:10px}nav{display:flex;overflow-x:auto;gap:5px}nav a{white-space:nowrap;margin:0}.section-grid,.stats{grid-template-columns:1fr 1fr}main{padding:12px}.card{padding:13px}.welcome{padding:20px}header{padding:16px}.brand{font-size:23px}}
+@media(max-width:380px){.stats,.section-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <div class="brand">⚓ Kube<span>Monitor</span></div>
+    <p>DevOps Monitoring Dashboard</p>
+    <div class="version">VERSION 2.0 · ROLLING UPDATE DEMO</div>
+  </div>
+  <div class="health">● Demo Cluster: Healthy</div>
+</header>
+
+<div class="layout">
+<aside>
+  <nav>
+    <a href="#dashboard">⌂ Dashboard</a>
+    <a href="#cluster">▦ Cluster</a>
+    <a href="#pods">◈ Pods</a>
+    <a href="#deployments">⬡ Deployments</a>
+    <a href="#services">◎ Services</a>
+    <a href="#monitoring">▤ Monitoring</a>
+    <a href="#events">♧ Events</a>
+  </nav>
+</aside>
+
+<main id="dashboard">
+  <section class="welcome">
+    <h1>Welcome to <span class="blue">KubeMonitor</span></h1>
+    <p>Monitor your Kubernetes project from one simple dashboard.<br>
+    Track application status, resource usage, deployments and cluster health.</p>
+    <p class="green">✓ Version 2 is ready for Kubernetes rolling update testing.</p>
+  </section>
+
+  <section class="stats" id="cluster">
+    <div class="card">
+      <h3>◈ Total Pods</h3>
+      <div class="number">3</div>
+      <div class="muted"><span class="green">● 3 Running</span><br>0 Pending · 0 Failed</div>
+    </div>
+    <div class="card" id="deployments">
+      <h3>⬡ Deployments</h3>
+      <div class="number">1</div>
+      <div class="muted"><span class="green">● 1 Available</span><br>Demo application</div>
+    </div>
+    <div class="card" id="services">
+      <h3>◎ Services</h3>
+      <div class="number">1</div>
+      <div class="muted"><span class="green">● 1 Active</span><br>Web application service</div>
+    </div>
+    <div class="card">
+      <h3>▤ Cluster Nodes</h3>
+      <div class="number">1</div>
+      <div class="muted"><span class="green">● Ready</span><br>Local Minikube cluster</div>
+    </div>
+  </section>
+
+  <section class="section-grid" id="monitoring">
+    <div class="card">
+      <h3>▤ Resource Usage — Demo</h3>
+      <p class="muted">CPU <span style="float:right">35%</span></p>
+      <div class="bar"><span class="cpu"></span></div>
+      <p class="muted">Memory <span style="float:right">64%</span></p>
+      <div class="bar"><span class="memory"></span></div>
+      <p class="muted">Storage <span style="float:right">18%</span></p>
+      <div class="bar"><span class="storage"></span></div>
+      <p class="muted">Sample values for dashboard design.</p>
+    </div>
+
+    <div class="card" id="events">
+      <h3>♧ Recent Events — Sample</h3>
+      <div class="event"><span class="dot"></span>KubeMonitor v2 interface prepared</div>
+      <div class="event"><span class="dot"></span>Docker image v2 — ready to build</div>
+      <div class="event"><span class="dot"></span>Kubernetes rolling update — pending</div>
+      <div class="event"><span class="dot"></span>Service configuration — unchanged</div>
+    </div>
+
+    <div class="card" id="pods" style="grid-column:1/-1">
+      <h3>◈ Application Pods — Example Data</h3>
+      <table>
+        <thead><tr><th>NAME</th><th>READY</th><th>STATUS</th><th>RESTARTS</th></tr></thead>
+        <tbody>
+          <tr><td>kubemonitor-web-demo</td><td>1/1</td><td class="green">Demo</td><td>0</td></tr>
+          <tr><td>kubemonitor-web-demo-2</td><td>1/1</td><td class="green">Demo</td><td>0</td></tr>
+          <tr><td>kubemonitor-web-demo-3</td><td>1/1</td><td class="green">Demo</td><td>0</td></tr>
+        </tbody>
+      </table>
+      <p class="muted">These are illustrative entries, not live Kubernetes data.</p>
+    </div>
+  </section>
+</main>
+</div>
+
+<footer>KubeMonitor v2.0 · Learning Project · Docker + Kubernetes + Minikube</footer>
+</body>
+</html>
